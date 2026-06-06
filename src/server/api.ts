@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { Router, Request, Response } from "express";
 import { Database, hashPassword } from "./db";
 import { BroadcastNotification, ScheduleItem } from "../types";
