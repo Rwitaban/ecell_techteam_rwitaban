@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { useState } from "react";
 import { ScheduleItem, User } from "../types";
 import { api } from "../lib/api";
@@ -38,33 +33,32 @@ export default function ScheduleBuilder({
     setLoadingEventId(event.id);
     setConflictWarning(null);
 
-    // Frontend pre-check for overlap conflict to fail fast and give gorgeous visual response
     const currentSchedule = events.filter((e) => user.itinerary.includes(e.id));
     const conflict = currentSchedule.find((item) => {
       if (item.day !== event.day) return false;
-      // Overlap formula: startA < endB && startB < endA
+    
       return event.startHour < item.endHour && item.startHour < event.endHour;
     });
 
     if (conflict) {
       setConflictWarning(`Overlap Conflict: "${event.title}" clashes with your current scheduled item "${conflict.title}"!`);
       setLoadingEventId(null);
-      // Remove overlap notice after 8 seconds
+     
       setTimeout(() => setConflictWarning(null), 8000);
       return;
     }
 
     try {
-      // Trigger API registration call
+
       await api.registerForEvent(event.id);
       
-      // Reload timeline and profile data states
+     
       const updatedUser = await api.getProfile();
       onRefreshUser(updatedUser);
       onRefreshEvents();
     } catch (err: any) {
       if (err.message.includes("Sandbox")) {
-        // Redirection to payment sandbox gateway
+       
         onTriggerCheckout("ticket", event.id, event.price, event.title);
       } else {
         setConflictWarning(err.message);
@@ -101,7 +95,7 @@ export default function ScheduleBuilder({
     }
   };
 
-  // List filtering controllers
+
   const filteredEvents = events.filter((item) => {
     const matchesSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
                           item.speaker.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -119,13 +113,13 @@ export default function ScheduleBuilder({
 
   return (
     <div className="flex flex-col gap-6" id="scheduler-panel-container">
-      {/* Selection Filter Rails */}
+      
       <div className="flex flex-col lg:flex-row gap-4 justify-between items-stretch lg:items-center border-b border-cyber-border/40 pb-5">
         
-        {/* Navigation Tabs */}
+        
         <div className="flex bg-cyber-black p-1 rounded-xl border border-cyber-border/60 self-start" id="timeline-tabs-rail">
           {(["all", "events", "workshops", "my"] as const).map((tab) => {
-            if (tab === "my" && !user) return null; // Only show 'my schedule' for logged-in students
+            if (tab === "my" && !user) return null; 
             return (
               <button
                 key={tab}
@@ -143,7 +137,7 @@ export default function ScheduleBuilder({
           })}
         </div>
 
-        {/* Day Filters */}
+      
         <div className="flex gap-2" id="day-tabs-rail">
           {([0, 1, 2] as const).map((day) => (
             <button
@@ -160,7 +154,7 @@ export default function ScheduleBuilder({
           ))}
         </div>
 
-        {/* Text Filter Input */}
+       
         <div className="relative flex-1 max-w-sm" id="timeline-search-field">
           <input
             type="text"
@@ -225,7 +219,7 @@ export default function ScheduleBuilder({
                 }`}
                 id={`agenda-item-${item.id}`}
               >
-                {/* Event Tags Ribbon */}
+                
                 <div className="flex justify-between items-center">
                   <div className="flex gap-2">
                     <span className={`text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded border ${
@@ -252,7 +246,7 @@ export default function ScheduleBuilder({
                       </span>
                     )}
 
-                    {/* Quick registration flag */}
+                   
                     {isRegistered && (
                       <span className="text-cyan-300 bg-cyan-950/20 border border-cyan-500/20 px-2 py-0.5 rounded flex items-center gap-1 font-sans text-[9px] uppercase font-bold">
                         <Check className="w-3 h-3 text-cyan-400 stroke-[3]" />
@@ -262,7 +256,6 @@ export default function ScheduleBuilder({
                   </div>
                 </div>
 
-                {/* Event core summary details */}
                 <div className="flex-1">
                   <h4 className="text-sm font-semibold tracking-wide font-display text-slate-200 mt-1 leading-snug">
                     {item.title}
@@ -272,7 +265,7 @@ export default function ScheduleBuilder({
                   </p>
                 </div>
 
-                {/* Event logistical stats */}
+                
                 <div className="grid grid-cols-2 gap-3.5 pt-3.5 border-t border-cyber-border/40 text-slate-400 font-mono text-[10px]">
                   <div className="flex items-center gap-1.5">
                     <User2 className="w-3.5 h-3.5 text-slate-500" />
@@ -304,7 +297,7 @@ export default function ScheduleBuilder({
                   </div>
                 </div>
 
-                {/* Interaction Action Panel */}
+                
                 <div className="flex gap-2 mt-2 pt-2 border-t border-cyber-border/20">
                   {user ? (
                     isRegistered ? (
@@ -342,7 +335,7 @@ export default function ScheduleBuilder({
                     </div>
                   )}
 
-                  {/* Admin Specific Action Keys */}
+                 
                   {user && (user.role === "admin" || user.role === "superadmin") && (
                     <div className="flex gap-1.5">
                       {onOpenEditModal && (
