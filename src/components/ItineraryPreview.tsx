@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { ScheduleItem, User } from "../types";
 import { Download, Calendar, MapPin, Printer, ShieldCheck, Mail, Globe, Award, Sparkles, Terminal } from "lucide-react";
 
@@ -12,7 +7,7 @@ interface ItineraryPreviewProps {
 }
 
 export default function ItineraryPreview({ user, events }: ItineraryPreviewProps) {
-  // Filter and sort items dynamically
+  
   const userItems = events
     .filter((e) => user.itinerary.includes(e.id))
     .sort((a, b) => {
