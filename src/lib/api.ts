@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { User, ScheduleItem, MerchandiseItem, Transaction, BroadcastNotification, FinancialSummary } from "../types";
 
 const API_BASE = "/api";
@@ -50,7 +45,7 @@ async function request(url: string, options: any = {}) {
       const errorData = await response.json();
       errorMsg = errorData.error || errorMsg;
     } catch {
-      // Ignored
+      
     }
     throw new Error(errorMsg);
   }
@@ -63,7 +58,7 @@ async function request(url: string, options: any = {}) {
 }
 
 export const api = {
-  // Authentication
+
   login: async (email: string, password: string) => {
     const data = await request("/auth/login", {
       method: "POST",
@@ -110,7 +105,7 @@ export const api = {
     return data.users as User[];
   },
 
-  // Events & Workshops Scheduler
+
   getEvents: async () => {
     const data = await request("/events");
     return data.events as ScheduleItem[];
@@ -179,7 +174,7 @@ export const api = {
     });
   },
 
-  // Notifications / Announcements Feed
+
   getNotifications: async () => {
     const data = await request("/notifications");
     return data.notifications as BroadcastNotification[];
@@ -193,7 +188,6 @@ export const api = {
     return data.notification as BroadcastNotification;
   },
 
-  // Financial Summary & Transactions
   getFinancialSummary: async () => {
     return await request("/finance/summary") as { summary: FinancialSummary; budgetPool: number };
   },
@@ -215,7 +209,7 @@ export const api = {
     return data.transactions as Transaction[];
   },
 
-  // Payments Pipeline
+
   initiateCheckout: async (type: "ticket" | "merchandise", itemId: string, amount: number, itemName: string) => {
     const data = await request("/payments/checkout", {
       method: "POST",
