@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState } from "react";
 import { api } from "../lib/api";
 import { Megaphone, ShieldAlert, Terminal } from "lucide-react";
