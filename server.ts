@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import express from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
@@ -13,24 +8,14 @@ import { initWebSocketServer } from "./src/server/ws";
 async function startServer() {
   const app = express();
   const PORT = 3000;
-
-  // Initialize unified database persistence layer
   const db = new Database();
-
-  // Basic configuration and middleware
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-
-  // Print request logs to sandbox container
   app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
     next();
   });
-
-  // Mount Full Stack API Router
   app.use("/api", createApiRouter(db));
-
-  // Connect Vite for high fidelity dev middleware, serving static SPA in production
   if (process.env.NODE_ENV !== "production") {
     console.log("Starting Express + Vite server in DEVELOPMENT mode...");
     const vite = await createViteServer({
