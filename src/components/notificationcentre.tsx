@@ -1,8 +1,3 @@
-
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { useEffect, useState, useRef } from "react";
 import { BroadcastNotification } from "../types";
 import { api, getSessionToken } from "../lib/api";
@@ -31,7 +26,7 @@ export default function NotificationCenter({
   const socketRef = useRef<WebSocket | null>(null);
   const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Load initial notifications
+
   const loadNotifications = async () => {
     try {
       const list = await api.getNotifications();
@@ -46,7 +41,7 @@ export default function NotificationCenter({
 
     let isDisposed = false;
 
-    // Setup secure WebSockets with automatic reconnection
+   
     const connectWebSocket = () => {
       if (isDisposed) return;
 
@@ -56,7 +51,6 @@ export default function NotificationCenter({
         } catch (_) {}
       }
 
-      // Determine correct connection protocol (ws:// or secure wss://)
       const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
       const host = window.location.host;
       const wsUrl = `${protocol}//${host}/api/ws`;
@@ -79,18 +73,17 @@ export default function NotificationCenter({
             return;
           }
 
-          // Hear regular notifications
+          
           if (eventName === "notification") {
             setNotifications((prev) => [payload, ...prev]);
             setUnreadCount((c) => c + 1);
             addToast(payload.title, payload.message, "info");
           }
 
-          // Hear payment status changes
+      
           else if (eventName === "payment-processed") {
             const currentToken = getSessionToken();
-            
-            // Triggers visual refresh of timelines or stores if current user completed payment
+    
             if (onRefreshEvents) onRefreshEvents();
             if (onRefreshFinance) onRefreshFinance();
             if (currentToken === payload.userId && onRefreshUser) {
@@ -105,23 +98,22 @@ export default function NotificationCenter({
             addToast(title, message, toastType);
           }
 
-          // Hear events updates (CRUD from admin or registrations increase)
           else if (eventName === "events-updated") {
             if (onRefreshEvents) onRefreshEvents();
             if (onRefreshFinance) onRefreshFinance();
           }
 
-          // Hear merchandise updates
+        
           else if (eventName === "merchandise-updated") {
-            if (onRefreshEvents) onRefreshEvents(); // refreshes any item status
+            if (onRefreshEvents) onRefreshEvents(); 
             if (onRefreshFinance) onRefreshFinance();
           }
 
-          // Hear role promotion assignment
+          
           else if (eventName === "role-update") {
             const currentToken = getSessionToken();
             if (currentToken === payload.userId) {
-              // Self role update requires profile details reload to reflect dashboard panel options immediately!
+            
               if (onRefreshUser) onRefreshUser();
               addToast("Your Security Role Updated!", `New assignment level: ${payload.role.toUpperCase()}`, "success");
             }
@@ -139,7 +131,7 @@ export default function NotificationCenter({
         if (isDisposed) return;
         console.warn(`[ws-client] Connection interrupted (Code ${event.code}). Initiating automatic reconnect backoff...`);
         
-        // Clean up socket ref and schedule reconnect after 5 seconds
+        
         socketRef.current = null;
         if (reconnectTimeoutRef.current) clearTimeout(reconnectTimeoutRef.current);
         reconnectTimeoutRef.current = setTimeout(connectWebSocket, 5000);
@@ -164,8 +156,7 @@ export default function NotificationCenter({
   const addToast = (title: string, message: string, type: "info" | "success" | "warning") => {
     const id = Math.random().toString(36).slice(2, 9);
     setToasts((prev) => [...prev, { id, title, message, type }]);
-    
-    // Automatically dismiss after 6 seconds
+   
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
     }, 6000);
@@ -182,7 +173,7 @@ export default function NotificationCenter({
 
   return (
     <div className="relative" id="notification-center-root">
-      {/* Absolute Trigger Button with glowing dot */}
+     
       <button
         onClick={handleOpenCenter}
         className="relative p-2.5 rounded-lg border border-cyber-border bg-cyber-card/60 text-slate-300 hover:text-cyan-400 hover:border-cyan-500/40 transition-all duration-300 pointer-events-auto"
@@ -200,7 +191,7 @@ export default function NotificationCenter({
         )}
       </button>
 
-      {/* Float Toasts Container (Fixed stack at top right index) */}
+
       <div className="fixed top-24 right-6 z-50 flex flex-col gap-3 w-96 max-w-full pointer-events-none" id="toasts-portal">
         {toasts.map((toast) => (
           <div
@@ -241,7 +232,6 @@ export default function NotificationCenter({
         ))}
       </div>
 
-      {/* Dropdown Announcements panel */}
       {isOpen && (
         <>
           <div className="fixed inset-0 z-30" onClick={() => setIsOpen(false)} />
