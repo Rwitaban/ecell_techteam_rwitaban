@@ -106,3 +106,13 @@ Role-Based Access Control is enforced on the server. The three supported roles g
 1.  **Student (Standard User)**: Register a profile, purchase souvenirs, register sessions in personal portfolios, and inspect customized itinerary passes.
 2.  **Admin (Intermediate User)**: Unlocks administrative menus. Authorizes session CRUD (creating and editing agenda timelines) and broadcasts global realtime notifications to client terminals.
 3.  **Superadmin (Supreme Privilege)**: Full system command. Evaluates all incoming transaction metrics, and audits registered customer ledgers and financial summaries.
+
+##  Some Sneekpeeks into the App
+<img width="1469" height="661" alt="Screenshot 2026-06-06 at 10 08 58 PM" src="https://github.com/user-attachments/assets/beff5923-c5a1-4584-b737-4f2a66c98a53" />
+<img width="1470" height="662" alt="Screenshot 2026-06-06 at 10 09 12 PM" src="https://github.com/user-attachments/assets/56290a8b-4dd2-4b8e-a2fa-4397487d87f7" />
+<img width="1468" height="656" alt="Screenshot 2026-06-06 at 10 09 34 PM" src="https://github.com/user-attachments/assets/4be2d3af-453f-4167-bbb8-c6b9b48f3966" />
+<img width="1464" height="655" alt="Screenshot 2026-06-06 at 10 09 45 PM" src="https://github.com/user-attachments/assets/bdc721a0-e20d-419e-90aa-5982d0c6b2dc" />
+<img width="1470" height="657" alt="Screenshot 2026-06-06 at 10 10 00 PM" src="https://github.com/user-attachments/assets/830be957-69e7-4667-9f9c-797a30545ff9" />
+<img width="1470" height="657" alt="Screenshot 2026-06-06 at 10 10 00 PM 1" src="https://github.com/user-attachments/assets/a2363ae6-4d74-426d-8ae2-5cc2547a5b20" />
+<img width="1470" height="665" alt="Screenshot 2026-06-06 at 10 10 11 PM" src="https://github.com/user-attachments/assets/70a1a58c-99fc-4c7a-bd49-197a6ef2cbe4" />
+
