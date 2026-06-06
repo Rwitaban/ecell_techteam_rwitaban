@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState, useEffect } from "react";
 import { User, ScheduleItem, MerchandiseItem, Transaction } from "./types";
 import { api, clearSession, getStoredUser } from "./lib/api";
@@ -23,7 +18,7 @@ export default function App() {
   const [activeTab, setActiveTab] = useState<"narrative" | "schedule" | "itinerary" | "souvenirs" | "admin" | "superadmin">("narrative");
   const [allUsers, setAllUsers] = useState<User[]>([]);
 
-  // Auth form states
+ 
   const [isLogin, setIsLogin] = useState(true);
   const [authEmail, setAuthEmail] = useState("");
   const [authPassword, setAuthPassword] = useState("");
@@ -33,13 +28,13 @@ export default function App() {
   const [authError, setAuthError] = useState("");
   const [authLoading, setAuthLoading] = useState(false);
 
-  // Modals controller states
+
   const [activeCheckoutTx, setActiveCheckoutTx] = useState<Transaction | null>(null);
   const [isCreateEventOpen, setIsCreateEventOpen] = useState(false);
   const [editingEvent, setEditingEvent] = useState<ScheduleItem | null>(null);
   const [isCreateMerchOpen, setIsCreateMerchOpen] = useState(false);
 
-  // Reload standard feeds
+
   const loadMainCatalogFeeds = async () => {
     try {
       const allEvents = await api.getEvents();
@@ -67,11 +62,11 @@ export default function App() {
       const list = await api.getUsersList();
       setAllUsers(list);
     } catch {
-      // Ignored
+      
     }
   };
 
-  // Onboarding session validation
+  
   useEffect(() => {
     loadMainCatalogFeeds();
     const loaded = getStoredUser();
@@ -80,7 +75,7 @@ export default function App() {
     }
   }, []);
 
-  // Sync users list whenever administration panels mount
+
   useEffect(() => {
     if (user && (user.role === "admin" || user.role === "superadmin")) {
       loadAllUsersList();
@@ -110,12 +105,12 @@ export default function App() {
 
     try {
       if (isLogin) {
-        // Sign in
+        
         const data = await api.login(authEmail, authPassword);
         setUser(data.user);
         setActiveTab("schedule");
       } else {
-        // Sign up student
+  
         const data = await api.register({
           email: authEmail,
           password: authPassword,
@@ -127,7 +122,7 @@ export default function App() {
         setActiveTab("schedule");
       }
       
-      // Clean up fields
+  
       setAuthEmail("");
       setAuthPassword("");
       setAuthName("");
@@ -146,7 +141,6 @@ export default function App() {
     setActiveTab("narrative");
   };
 
-  // Secure checkout processor bridge
   const triggerSandboxCheckout = async (type: "ticket" | "merchandise", itemId: string, amount: number, itemName: string) => {
     try {
       const pendingTx = await api.initiateCheckout(type, itemId, amount, itemName);
@@ -159,18 +153,18 @@ export default function App() {
   return (
     <div className="min-h-screen flex flex-col justify-between cyber-grid py-4 relative selection:bg-cyan-500 selection:text-black" id="apex-portal-root">
       
-      {/* Mesh Gradient Background Overlays */}
+   
       <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-indigo-600/25 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-cyan-600/15 rounded-full blur-[100px] pointer-events-none" />
       <div className="absolute top-[20%] right-[10%] w-[30%] h-[30%] bg-purple-600/15 rounded-full blur-[80px] pointer-events-none" />
 
-      {/* Main Structural Frame Layer (Fluid Desktop-First Padding Constraints) */}
+
       <div className="w-full max-w-7xl mx-auto px-4 xl:px-6 flex-1 flex flex-col gap-6 z-15 relative">
         
-        {/* Global Navigation Hub */}
+
         <header className="flex flex-col sm:flex-row justify-between items-center bg-cyber-dark/80 backdrop-blur-md rounded-2xl border border-cyber-border/80 px-6 py-4 gap-4" id="global-navbar">
           
-          {/* Summit logo branding details */}
+  
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 to-cyber-purple rounded-xl flex items-center justify-center font-bold text-lg text-cyber-black shadow-lg">
               A
@@ -186,7 +180,7 @@ export default function App() {
             </div>
           </div>
 
-          {/* Active Navigation tab shortcuts */}
+          
           <div className="flex flex-wrap gap-1.5 bg-cyber-black p-1 rounded-xl border border-cyber-border/60" id="navbar-links">
             <button
               onClick={() => setActiveTab("narrative")}
