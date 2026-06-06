@@ -1,0 +1,6 @@
+{
+  "name": "Apex Summit",
+  "description": "Full-stack management platform for APEX '26, featuring three-tier RBAC dashboards, live schedule builders, secure payments, and real-time Server-Sent Events (SSE) announcements.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
