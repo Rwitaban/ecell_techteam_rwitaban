@@ -1,7 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
 
 import React, { useState, useEffect } from "react";
 import { User, Transaction, ScheduleItem, FinancialSummary } from "../types";
@@ -89,7 +85,7 @@ export default function FinanceDashboard({ onRefreshFinance, registeredUsers, on
 
   return (
     <div className="flex flex-col gap-6" id="superadmin-engine-panel">
-      {/* Visual action alert bar */}
+      
       {successNotif && (
         <div className="p-4 bg-emerald-950/20 border border-emerald-500/30 text-emerald-400 font-mono text-[11px] rounded-xl flex items-center gap-2 shadow-xl animate-fade-in">
           <ShieldCheck className="w-5 h-5 text-emerald-400 animate-pulse" />
@@ -97,10 +93,9 @@ export default function FinanceDashboard({ onRefreshFinance, registeredUsers, on
         </div>
       )}
 
-      {/* Grid of financial metadata overview blocks */}
+  
       <div className="grid grid-cols-1 md:grid-cols-4 gap-5" id="finance-stats-grid">
-        
-        {/* Core Revenue Metric */}
+      
         <div className="rounded-2xl border border-cyber-border bg-cyber-card/25 p-5 relative overflow-hidden flex flex-col justify-between h-28 hover:border-cyan-500/30 transition-colors">
           <div className="absolute top-0 right-0 p-3 text-cyan-500/10">
             <DollarSign className="w-16 h-16" />
@@ -115,7 +110,7 @@ export default function FinanceDashboard({ onRefreshFinance, registeredUsers, on
           </div>
         </div>
 
-        {/* Budget Allocation Metric */}
+        
         <div className="rounded-2xl border border-cyber-border bg-cyber-card/25 p-5 relative overflow-hidden flex flex-col justify-between h-28 hover:border-purple-500/30 transition-colors">
           <div className="absolute top-0 right-0 p-3 text-purple-500/10">
             <Wallet className="w-16 h-16" />
@@ -132,7 +127,7 @@ export default function FinanceDashboard({ onRefreshFinance, registeredUsers, on
           </div>
         </div>
 
-        {/* Available administrative budget pool limits */}
+       
         <div className="rounded-2xl border border-cyber-border bg-cyber-card/25 p-5 relative overflow-hidden flex flex-col justify-between h-28 hover:border-pink-500/30 transition-colors">
           <div className="absolute top-0 right-0 p-3 text-rose-500/10">
             <Layers className="w-16 h-16" />
@@ -146,7 +141,6 @@ export default function FinanceDashboard({ onRefreshFinance, registeredUsers, on
           </div>
         </div>
 
-        {/* Total user registrations */}
         <div className="rounded-2xl border border-cyber-border bg-cyber-card/25 p-5 relative overflow-hidden flex flex-col justify-between h-28 hover:border-emerald-500/30 transition-colors">
           <div className="absolute top-0 right-0 p-3 text-emerald-500/10">
             <Users className="w-16 h-16" />
@@ -162,13 +156,12 @@ export default function FinanceDashboard({ onRefreshFinance, registeredUsers, on
         </div>
       </div>
 
-      {/* Structural layout: Budget settings and User Rank Administration */}
+    
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
         
-        {/* Left: Administrative Settings panel (Column 5) */}
+        
         <div className="lg:col-span-5 flex flex-col gap-5">
-          
-          {/* Calibrate overall Pool */}
+         
           <div className="rounded-2xl border border-cyber-border bg-cyber-card/15 p-5 flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <Settings className="w-4 h-4 text-cyan-400" />
@@ -196,7 +189,6 @@ export default function FinanceDashboard({ onRefreshFinance, registeredUsers, on
             </form>
           </div>
 
-          {/* Quick Metrics native bar summary */}
           <div className="rounded-2xl border border-cyber-border bg-cyber-card/15 p-5 flex flex-col gap-4">
             <div className="flex items-center gap-2">
               <BarChart4 className="w-4 h-4 text-purple-400" />
@@ -234,7 +226,7 @@ export default function FinanceDashboard({ onRefreshFinance, registeredUsers, on
           </div>
         </div>
 
-        {/* Right: User Security Rank Management Console (Column 7) */}
+      
         <div className="lg:col-span-7 rounded-2xl border border-cyber-border bg-cyber-card/15 p-5 flex flex-col gap-4">
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center pb-3 border-b border-cyber-border/40 gap-3">
             <div className="flex items-center gap-2">
@@ -254,7 +246,7 @@ export default function FinanceDashboard({ onRefreshFinance, registeredUsers, on
             </div>
           </div>
 
-          {/* User management list scrollbar container */}
+         
           <div className="flex flex-col gap-2.5 max-h-[300px] overflow-y-auto pr-1">
             {filteredUsers.length === 0 ? (
               <div className="text-center py-10 text-slate-500 text-xs font-mono">
@@ -283,7 +275,6 @@ export default function FinanceDashboard({ onRefreshFinance, registeredUsers, on
                       {u.role}
                     </span>
 
-                    {/* Quick role change actions */}
                     {u.role !== "superadmin" && (
                       <select
                         value={u.role}
@@ -303,7 +294,6 @@ export default function FinanceDashboard({ onRefreshFinance, registeredUsers, on
 
       </div>
 
-      {/* Global Transaction History Logs (Full audit trailing metrics) */}
       <div className="rounded-2xl border border-cyber-border bg-cyber-card/15 p-5 flex flex-col gap-4">
         <div className="pb-3 border-b border-cyber-border/40 flex items-center justify-between">
           <div className="flex items-center gap-2">
