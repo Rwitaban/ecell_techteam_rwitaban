@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { WebSocketServer, WebSocket } from "ws";
 import { Server } from "http";
 
