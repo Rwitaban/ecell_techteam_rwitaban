@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 export type UserRole = "student" | "admin" | "superadmin";
 
 export interface User {
@@ -12,9 +7,9 @@ export interface User {
   role: UserRole;
   phone?: string;
   college?: string;
-  registeredEvents: string[]; // List of eventIds
-  registeredWorkshops: string[]; // List of workshopIds
-  itinerary: string[]; // List of schedule slots/eventIds
+  registeredEvents: string[]; 
+  registeredWorkshops: string[]; 
+  itinerary: string[]; 
   createdAt: string;
 }
 
@@ -26,15 +21,15 @@ export interface ScheduleItem {
   speaker: string;
   speakerTitle: string;
   speakerCompany: string;
-  timeSlot: string; // "Day 1, 10:00 AM - 11:30 AM"
+  timeSlot: string; 
   day: 1 | 2;
-  startHour: number; // For overlap/conflict checking, e.g., 10.0 (10:00 AM) or 13.5 (1:30 PM)
-  endHour: number; // e.g., 11.5 (11:30 AM)
+  startHour: number; 
+  endHour: number;
   venue: string;
-  price: number; // Registration fee, 0 = free
+  price: number; 
   capacity: number;
   registeredCount: number;
-  allocatedBudget: number; // Budget allocation for this item (Superadmin managed)
+  allocatedBudget: number; 
 }
 
 export interface MerchandiseItem {
@@ -53,7 +48,7 @@ export interface Transaction {
   userName: string;
   userEmail: string;
   type: "ticket" | "merchandise";
-  itemId: string; // Event/Workshop ID, or Merchandise ID
+  itemId: string; 
   itemName: string;
   amount: number;
   status: "pending" | "success" | "failed";
