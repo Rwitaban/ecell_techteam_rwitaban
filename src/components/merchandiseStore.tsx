@@ -1,8 +1,3 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { useState } from "react";
 import { MerchandiseItem, User } from "../types";
 import { ShoppingBag, ShoppingCart, Trash2, X, Plus, AlertTriangle, Box, Package, Terminal } from "lucide-react";
@@ -22,7 +17,7 @@ export default function MerchandiseStore({
   onTriggerCheckout,
   onOpenCreateModal,
 }: MerchandiseStoreProps) {
-  // Simple local cartilage mechanism since merchandise is purchased item-by-item per Stripe session
+  
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [checkoutWarning, setCheckoutWarning] = useState<string | null>(null);
 
@@ -39,13 +34,13 @@ export default function MerchandiseStore({
       return;
     }
 
-    // Launch secure sandbox gateway modal flow for this item checkout!
+  
     onTriggerCheckout("merchandise", item.id, item.price, item.name);
   };
 
   return (
     <div className="flex flex-col gap-6" id="merchandise-shop-portal">
-      {/* Visual disclaimer ribbon */}
+     
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b border-cyber-border/40 pb-5 gap-3">
         <div>
           <h3 className="text-xs font-semibold uppercase tracking-wider font-display text-slate-400 flex items-center gap-1.5 font-mono">
@@ -78,7 +73,7 @@ export default function MerchandiseStore({
         </div>
       )}
 
-      {/* Grid of Souvenirs */}
+      
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" id="merchandise-items-grid">
         {merch.length === 0 ? (
           <div className="col-span-full text-center py-16 rounded-2xl border border-dashed border-cyber-border/60 bg-cyber-card/10 text-slate-500 text-xs font-mono">
@@ -95,7 +90,7 @@ export default function MerchandiseStore({
                 className="relative flex flex-col justify-between border border-cyber-border bg-cyber-card/30 rounded-2xl overflow-hidden group transition-all duration-300 hover:border-cyan-500/40 hover:bg-cyber-card/55 shadow-md hover:cyber-glow-teal"
                 id={`merch-item-${item.id}`}
               >
-                {/* Visual Header Image with responsive ratio */}
+                
                 <div className="relative aspect-square w-full bg-slate-900 overflow-hidden border-b border-cyber-border">
                   <img
                     src={item.imageUrl}
@@ -112,7 +107,7 @@ export default function MerchandiseStore({
                     </div>
                   )}
 
-                  {/* Stock counter indicators mapping */}
+                 
                   {!isSoldOut && (
                     <span className={`absolute top-3 left-3 text-[9px] font-bold font-mono px-2 py-0.5 rounded border ${
                       item.stock <= 5
@@ -124,14 +119,14 @@ export default function MerchandiseStore({
                   )}
                 </div>
 
-                {/* Bodily detail summaries */}
+                
                 <div className="p-4 flex-1 flex flex-col justify-between gap-3">
                   <div>
                     <h4 className="text-xs font-semibold text-slate-100 font-display line-clamp-2">{item.name}</h4>
                     <p className="text-[10px] text-slate-400 mt-1 font-mono leading-relaxed line-clamp-3">{item.description}</p>
                   </div>
 
-                  {/* Visual progress bar depicting live inventory limits */}
+                 
                   {!isSoldOut && (
                     <div className="mt-1 flex flex-col gap-1.5">
                       <div className="flex justify-between text-[8px] font-mono text-slate-500">
