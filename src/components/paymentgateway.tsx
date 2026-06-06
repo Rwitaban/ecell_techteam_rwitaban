@@ -1,8 +1,3 @@
-
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import { useState } from "react";
 import { Transaction } from "../types";
 import { api } from "../lib/api";
@@ -29,11 +24,11 @@ export default function PaymentGateway({ transaction, onSuccess, onClose }: Paym
     setStep("processing");
     setErrorMsg("");
 
-    // Artificially wait 2.5 seconds to simulate secure bank-handshake callbacks
+    
     setTimeout(async () => {
       try {
         if (status === "fail") {
-          // Trigger failed payment simulation webhook on server
+         
           const finalTx = await api.triggerStripeWebhookSim(transaction.id, false);
           setCompletedTx(finalTx);
           setStep("failed");
@@ -42,7 +37,6 @@ export default function PaymentGateway({ transaction, onSuccess, onClose }: Paym
           return;
         }
 
-        // Trigger secure webhook simulating Stripe/Razorpay webhook receiver hit
         const finalTx = await api.triggerStripeWebhookSim(transaction.id, true);
         setCompletedTx(finalTx);
         setStep("completed");
@@ -59,7 +53,7 @@ export default function PaymentGateway({ transaction, onSuccess, onClose }: Paym
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-cyber-black/90 backdrop-blur-md p-4" id="stripe-checkout-viewport">
       <div className="relative w-full max-w-md border border-cyber-border bg-cyber-dark rounded-2xl shadow-2xl overflow-hidden cyber-glow-teal">
-        {/* Gateway Header */}
+    
         <div className="flex items-center justify-between border-b border-cyber-border/80 bg-cyber-card/40 px-5 py-4">
           <div className="flex items-center gap-2">
             <Lock className="w-4 h-4 text-cyan-400" />
@@ -75,11 +69,10 @@ export default function PaymentGateway({ transaction, onSuccess, onClose }: Paym
           )}
         </div>
 
-        {/* Dynamic Stepper Panels */}
         <div className="p-6">
           {step === "gateway" && (
             <div className="flex flex-col gap-5">
-              {/* Order Overview Panel */}
+
               <div className="rounded-xl bg-cyber-black p-4 border border-cyber-border/40 font-mono">
                 <span className="text-[10px] text-slate-500 uppercase tracking-widest">Transaction Statement</span>
                 <h4 className="text-xs text-slate-200 mt-1 font-sans font-medium">{transaction.itemName}</h4>
@@ -89,13 +82,13 @@ export default function PaymentGateway({ transaction, onSuccess, onClose }: Paym
                 </div>
               </div>
 
-              {/* Secure Credit Card Mock Sheet */}
+              
               <div className="flex flex-col gap-3 font-mono">
                 <span className="text-[10px] text-slate-500 uppercase tracking-widest flex items-center gap-1.5">
                   <CreditCard className="w-3.5 h-3.5" /> Credit Card Details (Sandbox Mock)
                 </span>
                 
-                {/* Visual card */}
+              
                 <div className="relative p-5 rounded-xl bg-gradient-to-br from-slate-900 to-indigo-950 border border-slate-800 text-slate-200 shadow-lg select-none">
                   <div className="flex justify-between items-start">
                     <div className="text-[10px] font-mono tracking-widest text-slate-400 uppercase">APEX PREMIER CARD</div>
@@ -128,7 +121,6 @@ export default function PaymentGateway({ transaction, onSuccess, onClose }: Paym
                 </div>
               </div>
 
-              {/* Payment Buttons Panel */}
               <div className="flex flex-col gap-2 mt-2">
                 <button
                   onClick={() => handleSimulatePayment("success")}
